@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
+import { PageHeader, ListGroup, ListGroupItem, Table } from "react-bootstrap";
 import "./Home.css";
 import { API } from "aws-amplify";
 
@@ -25,32 +25,51 @@ export default function Home() {
     function loadLeagues() {
         return API.get("ChiVB-Web", "/leagues")
     }
-
-    function renderLeaguesList(leagues) { 
-        console.log(leagues)       
-        return (
-            <ListGroupItem>
-                <h4>{leagues.key1}</h4>
-                <h4>{leagues.key2}</h4>
-                <h4>{leagues.key3}</h4>
-            </ListGroupItem>
+    
+    function renderLeaguesTableRows(leagues) {
+        console.log(leagues)
+        return leagues.map((league, i) =>
+          <tr>
+              <td>{league.league}</td>
+              <td>{league.skill}</td>
+              <td>{league.gender}</td>
+              <td>{league.fmt}</td>
+              <td>{league.day}</td>
+              <td>{league.time}</td>
+              <td>{league.startdate}</td>
+              <td>{league.surface}</td>
+              <td>{league.teamprice}</td>
+              <td><a href={`league.leagueurl`}>Link</a></td>
+          </tr>  
         );
     }
 
-    function renderLeagues() {
+    function renderLeaguesTable() {
         return (
             <div className="leagues">
-                <PageHeader>Leagues1</PageHeader>
-                <ListGroup>
-                    {!isLoading && renderLeaguesList(leagues)}
-                </ListGroup>
+                <PageHeader>Leagues</PageHeader>
+                <Table>
+                    <tr>
+                        <td>League</td>
+                        <td>Skill</td>
+                        <td>Gender</td>
+                        <td>Format</td>
+                        <td>Day</td>
+                        <td>Time</td>
+                        <td>Start Date</td>
+                        <td>Surface</td>
+                        <td>Team Price</td>
+                        <td>League Page</td>
+                    </tr>
+                    {!isLoading && renderLeaguesTableRows(leagues)}
+                </Table>
             </div>
-        );        
+        )
     }
 
     return (
         <div className="Home">
-            {renderLeagues()}
+            { renderLeaguesTable() }
         </div>
     );
 }
