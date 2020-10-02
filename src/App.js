@@ -7,14 +7,14 @@ import Routes from "./Routes";
 function App() {
   return (
     <div className="App container">
-      <Navbar fluid collapseOnSelect>
+      {/* <Navbar fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">Leagues</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
-      </Navbar>
+      </Navbar> */}
       <Routes />
     </div>
   );

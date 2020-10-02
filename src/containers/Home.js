@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { PageHeader, ListGroup, ListGroupItem, Table } from "react-bootstrap";
+import { PageHeader, Table } from "react-bootstrap";
 import "./Home.css";
 import { API } from "aws-amplify";
 
@@ -38,7 +38,7 @@ export default function Home() {
               <td>{league.time}</td>
               <td>{league.startdate}</td>
               <td>{league.surface}</td>
-              <td>{league.teamprice}</td>
+              <td>{league.teamprice}/{league.soloprice}</td>
               <td><a href={`league.leagueurl`}>Link</a></td>
           </tr>  
         );
@@ -58,7 +58,7 @@ export default function Home() {
                         <td>Time</td>
                         <td>Start Date</td>
                         <td>Surface</td>
-                        <td>Team Price</td>
+                        <td>Price Team/Individual</td>
                         <td>League Page</td>
                     </tr>
                     {!isLoading && renderLeaguesTableRows(leagues)}
